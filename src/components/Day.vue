@@ -25,22 +25,22 @@
 
     </div>
 
-    <template v-for="(event, i) in visibleEvents">
+    <!-- <template v-for="(event, i) in visibleEvents"> -->
 
-      <ds-calendar-event
+      <!-- <ds-calendar-event
         v-bind="{$scopedSlots}"
         v-on="$listeners"
         :key="event.id"
         :calendar-event="event"
         :calendar="calendar"
         :index="i"
-      ></ds-calendar-event>
+      ></ds-calendar-event> -->
 
-    </template>
+    <!-- </template> -->
 
-    <div v-if="hasPlaceholder">
+    <!-- <div v-if="hasPlaceholder"> -->
 
-      <ds-calendar-event-placeholder
+      <!-- <ds-calendar-event-placeholder
         v-bind="{$scopedSlots}"
         v-on="$listeners"
         :day="day"
@@ -48,9 +48,9 @@
         :placeholder-for-create="placeholderForCreate"
         :calendar="calendar"
         :index="visibleEvents.length"
-      ></ds-calendar-event-placeholder>
+      ></ds-calendar-event-placeholder> -->
 
-    </div>
+    <!-- </div> -->
 
   </div>
 
@@ -58,6 +58,7 @@
 
 <script>
 import { Day, Calendar, CalendarEvent, Functions as fn } from 'dayspan';
+import defaults from "../defaults";
 
 
 export default {
@@ -91,11 +92,8 @@ export default {
 
     formats:
     {
-      validate(x) {
-        return this.$dsValidate( x, 'formats' );
-      },
       default() {
-        return this.$dsDefaults().formats;
+        return defaults.formats;
       }
     }
   },
@@ -171,17 +169,17 @@ export default {
       this.$emit('add', this.day);
     },
 
-    viewDay(event)
+    viewDay()
     {
       this.$emit('view-day', this.day);
     },
 
-    mouseEnterDay($event)
+    mouseEnterDay()
     {
       this.$emit('mouse-enter-day', this.day);
     },
 
-    mouseLeaveDay($event)
+    mouseLeaveDay()
     {
       this.$emit('mouse-leave-day', this.day);
     },

@@ -90,7 +90,7 @@ export function dsDefaults()
 
 export function dsBind(bind)
 {
-  return function(data, tag, value, asProp, isSync)
+  return function(data, tag, value)
   {
     if (value && value.$scopedSlots)
     {

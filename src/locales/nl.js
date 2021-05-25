@@ -3,32 +3,32 @@ var suffix = (value, prepend) => (prepend ? value : '') + 'e';
 export default {
   event: 'evenement',
   promptLabels: {
-    actionRemove:       'Weet je zeker dat je dit evenement wilt verwijderen?',
-    actionExclude:      'Weet je zeker dat je deze instantie van het evenement wilt verwijderen?',
-    actionCancel:       'Weet je zeker dat je dit evenement wilt annuleren?',
-    actionUncancel:     'Weet je zeker dat je de annulering van dit evenement ongedaan wilt maken?',
-    actionSetStart:     'Weet je zeker dat je deze instantie als de eerste wilt kenmerken?',
-    actionSetEnd:       'Weet je zeker dat je deze instantie als de laatste wilt kenmerken?',
-    actionMove:         'Weet je zeker dat je dit evenement wilt verplaatsen?',
-    actionInclude:      'Weet je zeker dat je een instantie van dit evenement wilt toevoegen?',
-    move:               'Weet je zeker dat je dit evement wilt verplaatsen?',
-    toggleAllDay:       'Weet je zeker dat je wilt schakelen tussen hele dag en moment?',
+    actionRemove: 'Weet je zeker dat je dit evenement wilt verwijderen?',
+    actionExclude: 'Weet je zeker dat je deze instantie van het evenement wilt verwijderen?',
+    actionCancel: 'Weet je zeker dat je dit evenement wilt annuleren?',
+    actionUncancel: 'Weet je zeker dat je de annulering van dit evenement ongedaan wilt maken?',
+    actionSetStart: 'Weet je zeker dat je deze instantie als de eerste wilt kenmerken?',
+    actionSetEnd: 'Weet je zeker dat je deze instantie als de laatste wilt kenmerken?',
+    actionMove: 'Weet je zeker dat je dit evenement wilt verplaatsen?',
+    actionInclude: 'Weet je zeker dat je een instantie van dit evenement wilt toevoegen?',
+    move: 'Weet je zeker dat je dit evement wilt verplaatsen?',
+    toggleAllDay: 'Weet je zeker dat je wilt schakelen tussen hele dag en moment?',
     removeExistingTime: 'Weet je zeker dat je alle instanties van dit evenement die op het geselecteerde moment plaatsvinden wilt verwijderen?'
   },
   placeholder: {
     noTitle: '(geen titel)'
   },
   patterns: {
-    lastDay:        (day) => 'Laatste dag van de maand',
+    lastDay: () => 'Laatste dag van de maand',
     lastDayOfMonth: (day) => 'Laaste dag van ' + day.toMoment().locale('nl').format('MMMM'),
-    lastWeekday:    (day) => 'Laatste ' + day.toMoment().locale('nl').format('dddd') + ' in ' + day.toMoment().locale('nl').format('MMMM'),
+    lastWeekday: (day) => 'Laatste ' + day.toMoment().locale('nl').format('dddd') + ' in ' + day.toMoment().locale('nl').format('MMMM'),
     none: () => 'Geen herhaling',
     daily: () => 'Dagelijks',
     weekly: (day) => 'Wekelijks op ' + day.toMoment().locale('nl').format('dddd'),
     monthlyWeek: (day) => 'Maandelijks op de ' + suffix(day.weekspanOfMonth + 1, true) + ' ' + day.toMoment().locale('nl').format('dddd'),
     annually: (day) => 'Jaalijks op ' + day.format('D MMMM'),
     annuallyMonthWeek: (day) => 'Jaarlijks op de ' + suffix(day.weekspanOfMonth + 1, true) + ' ' + day.toMoment().locale('nl').format('dddd') + ' van ' + day.toMoment().locale('nl').format('MMMM'),
-    weekday: (day) => 'Iedere werkdag (maandag tot vrijdag)',
+    weekday: () => 'Iedere werkdag (maandag tot vrijdag)',
     monthly: (day) => 'Maandelijks op de ' + day.toMoment().locale('nl').format('Do') + ' dag',
     custom: () => 'Aangepast..'
   },
@@ -119,7 +119,7 @@ export default {
   defaults: {
     dsDay: {
       formats: {
-        month:  'MMM'
+        month: 'MMM'
       }
     },
     dsCalendarApp: {
@@ -128,7 +128,7 @@ export default {
         { label: 'Week' },
         { label: 'Maand' },
         { label: 'Jaar' },
-        { label: 'Schema' },
+        { label: 'Schema' },
         { label: '4 dagen' }
       ],
       formats: {
@@ -150,133 +150,133 @@ export default {
     },
     dsAgendaEvent: {
       formats: {
-        firstLine:  'ddd',
+        firstLine: 'ddd',
         secondLine: 'D MMM',
-        start:      'dddd D MMMM',
-        time:       'H:mm'
+        start: 'dddd D MMMM',
+        time: 'H:mm'
       },
       labels: {
-        allDay:   'Hele dag',
-        options:  'Opties',
-        close:    'Sluiten',
-        day:      ['dag', 'dagen'],
-        days:     ['dag', 'dagen'],
-        minute:   ['minuut', 'minuten'],
-        minutes:  ['minuut', 'minuten'],
-        hour:     ['uur', 'uur'],
-        hours:    ['uur', 'uur'],
-        week:     ['week', 'weken'],
-        weeks:    ['week', 'weken'],
-        busy:     'Bezet',
-        free:     'Beschikbaar'
+        allDay: 'Hele dag',
+        options: 'Opties',
+        close: 'Sluiten',
+        day: ['dag', 'dagen'],
+        days: ['dag', 'dagen'],
+        minute: ['minuut', 'minuten'],
+        minutes: ['minuut', 'minuten'],
+        hour: ['uur', 'uur'],
+        hours: ['uur', 'uur'],
+        week: ['week', 'weken'],
+        weeks: ['week', 'weken'],
+        busy: 'Bezet',
+        free: 'Beschikbaar'
       }
     },
     dsCalendarEventChip: {
       formats: {
-        fullDay:          'ddd D MMM YYYY',
-        timed:            'ddd D MMM YYYY'
+        fullDay: 'ddd D MMM YYYY',
+        timed: 'ddd D MMM YYYY'
       }
     },
     dsCalendarEventPopover: {
       formats: {
-        start:    'dddd D MMMM',
-        time:     'H:mm'
+        start: 'dddd D MMMM',
+        time: 'H:mm'
       },
       labels: {
-        allDay:   'Hele dag',
-        options:  'Opties',
-        close:    'Sluiten',
-        day:      ['dag', 'dagen'],
-        days:     ['dag', 'dagen'],
-        minute:   ['minuut', 'minuten'],
-        minutes:  ['minuut', 'minuten'],
-        hour:     ['uur', 'uur'],
-        hours:    ['uur', 'uur'],
-        week:     ['week', 'weken'],
-        weeks:    ['week', 'weken'],
-        busy:     'Bezet',
-        free:     'Beschikbaar'
+        allDay: 'Hele dag',
+        options: 'Opties',
+        close: 'Sluiten',
+        day: ['dag', 'dagen'],
+        days: ['dag', 'dagen'],
+        minute: ['minuut', 'minuten'],
+        minutes: ['minuut', 'minuten'],
+        hour: ['uur', 'uur'],
+        hours: ['uur', 'uur'],
+        week: ['week', 'weken'],
+        weeks: ['week', 'weken'],
+        busy: 'Bezet',
+        free: 'Beschikbaar'
       }
     },
     dsCalendarEventCreatePopover: {
       formats: {
-        start:    'dddd D MMMM',
-        time:     'H:mm'
+        start: 'dddd D MMMM',
+        time: 'H:mm'
       },
       labels: {
-        title:    'Titel',
-        allDay:   'Hele dag',
-        close:    'Sluiten',
-        save:     'Opslaan',
-        day:      ['dag', 'dagen'],
-        days:     ['dag', 'dagen'],
-        minute:   ['minuut', 'minuten'],
-        minutes:  ['minuut', 'minuten'],
-        hour:     ['uur', 'uur'],
-        hours:    ['uur', 'uur'],
-        week:     ['week', 'weken'],
-        weeks:    ['week', 'weken'],
-        busy:     'Bezet',
-        free:     'Beschikbaar',
+        title: 'Titel',
+        allDay: 'Hele dag',
+        close: 'Sluiten',
+        save: 'Opslaan',
+        day: ['dag', 'dagen'],
+        days: ['dag', 'dagen'],
+        minute: ['minuut', 'minuten'],
+        minutes: ['minuut', 'minuten'],
+        hour: ['uur', 'uur'],
+        hours: ['uur', 'uur'],
+        week: ['week', 'weken'],
+        weeks: ['week', 'weken'],
+        busy: 'Bezet',
+        free: 'Beschikbaar',
         location: 'Voeg een locatie toe',
         description: 'Voeg een beschrijving toe',
         calendar: 'Categorie',
       },
       busyOptions: [
-        {text: 'Bezet'},
-        {text: 'Beschikbaar'}
+        { text: 'Bezet' },
+        { text: 'Beschikbaar' }
       ]
     },
     dsSchedule: {
       labels: {
-        editCustom:   'Aanpassen'
+        editCustom: 'Aanpassen'
       }
     },
     dsEvent: {
       labels: {
-        moreActions:  'Meer acties...',
-        cancel:       'Wijzigingen annuleren',
-        save:         'Opslaan',
-        title:        'Titel',
-        exclusions:   'Dit zijn evenementen of tijdspannes waarbij een normaliter voorkomend evenement uit het schema verwijderd is. Evenementen die verplaatst zijn verschijnen hier.',
-        inclusions:   'Dit zijn evenementen of tijdspannes waarbij een evenement is toegevoegd aan het schema. Evenementen die verplaatst zijn verschijnen hier.',
-        cancelled:    'Dit zijn evenementen of tijdspannes die geannulleerd zijn uit het schema.',
-        edit:         'Evenement bewerken',
-        add:          'Evenement toevoegen',
-        location:     'Voeg een locatie toe',
-        description:  'Voeg een beschrijving toe',
-        calendar:     'Categorie',
+        moreActions: 'Meer acties...',
+        cancel: 'Wijzigingen annuleren',
+        save: 'Opslaan',
+        title: 'Titel',
+        exclusions: 'Dit zijn evenementen of tijdspannes waarbij een normaliter voorkomend evenement uit het schema verwijderd is. Evenementen die verplaatst zijn verschijnen hier.',
+        inclusions: 'Dit zijn evenementen of tijdspannes waarbij een evenement is toegevoegd aan het schema. Evenementen die verplaatst zijn verschijnen hier.',
+        cancelled: 'Dit zijn evenementen of tijdspannes die geannulleerd zijn uit het schema.',
+        edit: 'Evenement bewerken',
+        add: 'Evenement toevoegen',
+        location: 'Voeg een locatie toe',
+        description: 'Voeg een beschrijving toe',
+        calendar: 'Categorie',
         tabs: {
-          details:    'Evenement',
-          forecast:   'Vooruitblik',
-          removed:    'Verwijderd',
-          added:      'Toegevoegd',
-          cancelled:  'Geannuleerd'
+          details: 'Evenement',
+          forecast: 'Vooruitblik',
+          removed: 'Verwijderd',
+          added: 'Toegevoegd',
+          cancelled: 'Geannuleerd'
         }
       },
       busyOptions: [
-        {text: 'Bezet'},
-        {text: 'Beschikbaar'}
+        { text: 'Bezet' },
+        { text: 'Beschikbaar' }
       ]
     },
     dsScheduleActions: {
       labels: {
-        remove:     'Dit evenement verwijderen',
-        exclude:    'Alleen dit evenement verwijderen',
-        cancel:     'Dit evenement annuleren',
-        uncancel:   'Annuleren ongedaaan maken',
-        move:       'Dit evenement verplaatsen',
-        include:    'Voeg een nieuw evenement toe',
-        setStart:   'Instellen als begin van herhaling',
-        setEnd:     'Instellen als eind van herhaling',
-        pickerOk:   'OK',
-        pickerCancel:'Annuleren'
+        remove: 'Dit evenement verwijderen',
+        exclude: 'Alleen dit evenement verwijderen',
+        cancel: 'Dit evenement annuleren',
+        uncancel: 'Annuleren ongedaaan maken',
+        move: 'Dit evenement verplaatsen',
+        include: 'Voeg een nieuw evenement toe',
+        setStart: 'Instellen als begin van herhaling',
+        setEnd: 'Instellen als eind van herhaling',
+        pickerOk: 'OK',
+        pickerCancel: 'Annuleren'
       }
     },
     dsScheduleForecast: {
       labels: {
-        prefix:     'De vooruitblik toont alle vorige en volgende',
-        suffix:     'evenementen binnen een jaar.'
+        prefix: 'De vooruitblik toont alle vorige en volgende',
+        suffix: 'evenementen binnen een jaar.'
       }
     },
     dsScheduleFrequencyDay: {
@@ -368,56 +368,56 @@ export default {
 
     dsScheduleSpan: {
       labels: {
-        startless:  'Begin der tijden',
-        endless:    'Einde der tijden',
+        startless: 'Begin der tijden',
+        endless: 'Einde der tijden',
         to: 'tot'
       },
       formats: {
-        start:      'D MMMM YYYY',
-        end:        'D MMMM YYYY'
+        start: 'D MMMM YYYY',
+        end: 'D MMMM YYYY'
       },
       suffix
     },
 
     dsScheduleTime: {
       labels: {
-        remove:     'Moment verwijderen',
-        add:        'Moment toevoegen'
+        remove: 'Moment verwijderen',
+        add: 'Moment toevoegen'
       }
     },
 
     dsScheduleTimes: {
       labels: {
-        all:        'Hele dag',
-        minute:     'minuut',
-        minutes:    'minuten',
-        hour:       'uur',
-        hours:      'uur',
-        day:        'dag',
-        days:       'dagen',
-        week:       'week',
-        weeks:      'weken',
-        month:      'maand',
-        months:     'maanden'
+        all: 'Hele dag',
+        minute: 'minuut',
+        minutes: 'minuten',
+        hour: 'uur',
+        hours: 'uur',
+        day: 'dag',
+        days: 'dagen',
+        week: 'week',
+        weeks: 'weken',
+        month: 'maand',
+        months: 'maanden'
       }
     },
 
     dsScheduleType: {
       formats: {
-        date:       'LL'
+        date: 'LL'
       }
     },
 
     dsScheduleTypeCustomDialog: {
       labels: {
-        save:     'Opslaan',
-        cancel:   'Annuleren'
+        save: 'Opslaan',
+        cancel: 'Annuleren'
       }
     },
 
     dsWeekDayHeader: {
       formats: {
-        weekday:    'ddd'
+        weekday: 'ddd'
       }
     },
 

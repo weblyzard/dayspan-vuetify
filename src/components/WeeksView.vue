@@ -1,100 +1,84 @@
 <template>
-
   <div class="ds-month">
-
     <div class="ds-week-header">
-
-      <div class="ds-week-header-day"
+      <div
+        class="ds-week-header-day"
         v-for="(weekday, i) in weekdays"
         :key="weekday"
-        :class="weekdayClasses(i)">
-
-        {{ weekday }}
-
+        :class="weekdayClasses(i)"
+      >
+        {{ weekday.substring(0,3) }}
       </div>
-
     </div>
 
     <ds-day-row
       v-for="i in rows"
-      v-bind="{$scopedSlots}"
-      v-on="$listeners"
       :key="i"
       :days="daysAtRow( i, 7 )"
       :calendar="calendar"
       :placeholder="placeholder"
       :placeholder-for-create="placeholderForCreate"
     ></ds-day-row>
-
   </div>
-
 </template>
 
 <script>
-import { Calendar, CalendarEvent } from 'dayspan';
-
+import { Calendar, CalendarEvent } from "dayspan";
+import defaults from "../defaults";
+import DsDayRow from "./DayRow"
 
 export default {
+  components: {
+    DsDayRow
+  },
 
-  name: 'dsWeeksView',
+  inject: ['$dayspan'],
 
-  props:
-  {
-    calendar:
-    {
+  props: {
+    calendar: {
       required: true,
-      type: Calendar
+      type: Calendar,
     },
 
-    placeholder:
-    {
-      type: CalendarEvent
+    placeholder: {
+      type: CalendarEvent,
     },
 
-    placeholderForCreate:
-    {
+    placeholderForCreate: {
       type: Boolean,
-      default: false
+      default: false,
     },
 
-    weekdays:
-    {
+    weekdays: {
       type: Array,
       default() {
-        return this.$dsDefaults().weekdays;
-      }
-    }
+        return defaults.weekdays;
+      },
+    },
   },
 
-  computed:
-  {
-    rows()
-    {
-      return Math.floor( this.calendar.days.length / 7 );
-    }
+  computed: {
+    rows() {
+      return Math.floor(this.calendar.days.length / 7);
+    },
   },
 
-  methods:
-  {
-    daysAtRow(row, rowSize)
-    {
-      var start = (row - 1) * rowSize;
-
-      return this.calendar.days.slice( start, start + rowSize );
+  methods: {
+    daysAtRow(row, rowSize) {
+      const start = (row - 1) * rowSize;
+      return this.calendar.days.slice(start, start + rowSize);
     },
 
-    weekdayClasses(weekday)
-    {
+    weekdayClasses(weekday) {
       return {
-        'ds-week-header-today': this.$dayspan.today.dayOfWeek === weekday
+        "ds-week-header-today": this.$dayspan.data.today.dayOfWeek === weekday,
       };
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">
-
 .ds-month {
   width: 100%;
   height: 100%;
@@ -120,5 +104,4 @@ export default {
     }
   }
 }
-
 </style>

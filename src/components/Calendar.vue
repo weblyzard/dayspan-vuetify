@@ -2,8 +2,9 @@
   <div class="ds-calendar">
 
     <div v-if="isYear" class="ds-month-view ds-year-view">
+      year
 
-      <ds-weeks-view class="ds-expand"
+      <!-- <ds-weeks-view class="ds-expand"
         v-bind="{$scopedSlots}"
         v-on="$listeners"
         :calendar="calendar"
@@ -15,15 +16,13 @@
         @mouse-up-event="mouseUp"
         @mouse-down-event="mouseDownEvent"
         @clear-placeholder="clearPlaceholder"
-      ></ds-weeks-view>
+      ></ds-weeks-view> -->
 
     </div>
 
     <div v-if="isMonth" class="ds-month-view">
 
       <ds-weeks-view class="ds-expand"
-        v-bind="{$scopedSlots}"
-        v-on="$listeners"
         :calendar="calendar"
         :placeholder="placeholder"
         :placeholder-for-create="placeholderForCreate"
@@ -38,8 +37,9 @@
     </div>
 
     <div v-if="isWeek || isDay" class="ds-week-view">
+      week
 
-      <ds-days-view
+      <!-- <ds-days-view
         v-bind="{$scopedSlots}"
         v-on="$listeners"
         :calendar="calendar"
@@ -54,7 +54,7 @@
         @mouse-up-day="mouseUp"
         @mouse-up-event="mouseUp"
         @clear-placeholder="clearPlaceholder"
-      ></ds-days-view>
+      ></ds-days-view> -->
 
     </div>
 
@@ -62,12 +62,13 @@
 </template>
 
 <script>
-import { Calendar, Schedule, CalendarEvent, Units, DaySpan, Day, Op, Functions as fn } from 'dayspan';
-
+import { Calendar, Schedule, Units, Op, Functions as fn } from 'dayspan';
+import DsWeeksView from './WeeksView';
 
 export default {
-
-  name: 'dsCalendar',
+  components: {
+    DsWeeksView
+  },
 
   props:
   {
@@ -80,7 +81,7 @@ export default {
     {
       type: Boolean,
       default() {
-        return this.$dsDefaults().handleAdd;
+        return true;
       }
     },
 
@@ -88,7 +89,7 @@ export default {
     {
       type: Boolean,
       default() {
-        return this.$dsDefaults().handleMove;
+        return true;
       }
     },
 
@@ -99,7 +100,7 @@ export default {
     }
   },
 
-  data: vm => ({
+  data: () => ({
     placeholder: null,
     placeholderForCreate: false,
     addStart: null

@@ -2,12 +2,9 @@
 
   <div class="ds-week">
 
-    <template v-for="(day, i) in days">
+    <template v-for="(day, i) in days" :key="i">
 
       <ds-day
-        v-bind="{$scopedSlots}"
-        v-on="$listeners"
-        :key="i"
         :day="day"
         :calendar="calendar"
         :placeholder="placeholder"
@@ -22,11 +19,13 @@
 
 <script>
 import { Calendar, CalendarEvent } from 'dayspan';
+import DsDay from './Day';
 
 
 export default {
-
-  name: 'dsDayRow',
+  components: {
+    DsDay
+  },
 
   props:
   {
