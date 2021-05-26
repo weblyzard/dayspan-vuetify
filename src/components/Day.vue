@@ -57,13 +57,18 @@
 </template>
 
 <script>
+import { inject } from 'vue';
 import { Day, Calendar, CalendarEvent, Functions as fn } from 'dayspan';
-import defaults from "../defaults";
+// import DsCalendarEvent from "./CalendarEvent";
 
+const componentName = 'dsDay';
 
 export default {
+  name: componentName,
 
-  name: 'dsDay',
+  components: {
+    // DsCalendarEvent
+  },
 
   props:
   {
@@ -93,7 +98,8 @@ export default {
     formats:
     {
       default() {
-        return defaults.formats;
+        const $dayspan = inject("$dayspan", {});
+        return $dayspan.defaults[componentName].formats;
       }
     }
   },

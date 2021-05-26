@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { ref, reactive, provide } from 'vue';
+import { ref, provide } from 'vue';
 import { Calendar } from 'dayspan';
 import CalendarApp from './components/CalendarApp.vue'
 import Dayspan from './component'
@@ -27,8 +27,9 @@ export default {
       console.log('save state callback');
     }
 
-    const dayspan = reactive(Dayspan)
-    provide('$dayspan', dayspan)
+    const dayspan = new Dayspan();
+    dayspan.init();
+    provide('$dayspan', dayspan);
 
     return {
       calendar,

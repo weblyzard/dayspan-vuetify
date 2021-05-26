@@ -5,15 +5,23 @@
         {{ summary }}
       </div>
 
-      <v-btn size="x-small" icon flat
+      <v-btn
+        size="x-small"
+        icon
+        flat
         @click="prev"
-        class="ds-light-forecolor ma-0">
+        class="ds-light-forecolor ma-0"
+      >
         <v-icon>mdi-chevron-left</v-icon>
       </v-btn>
 
-      <v-btn size="x-small" icon flat
+      <v-btn
+        size="x-small"
+        icon
+        flat
         class="ds-light-forecolor ma-0"
-        @click="next">
+        @click="next"
+      >
         <v-icon>mdi-chevron-right</v-icon>
       </v-btn>
       <!-- <v-tooltip bottom>
@@ -42,34 +50,36 @@
           <span slot="activator">{{ weekday.charAt(0) }}</span>
           <span>{{ weekday }}</span>
         </v-tooltip> -->
-
       </div>
     </div>
 
     <div class="ds-week">
-      <div class="ds-day-pick"
+      <div
+        class="ds-day-pick"
         v-for="day in month.days"
-        :key="day.dayIdentifier">
-
-        <v-btn size="x-small" icon flat class="ma-0"
-          @click="pick( day )"
+        :key="day.dayIdentifier"
+      >
+        <v-btn
+          size="x-small"
+          icon
+          flat
+          class="ma-0"
+          @click="pick(day)"
           :class="{
             'btn--active': day.currentDay,
             'ds-light-forecolor': !day.inCalendar,
-            'primary': isHighlighted( day )
-          }">
+            primary: isHighlighted(day),
+          }"
+        >
           {{ day.dayOfMonth }}
         </v-btn>
-
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { computed, ref } from "vue";
-// import { DaySpan, Calendar, Functions as fn } from "dayspan";
-import { DaySpan, Calendar } from "dayspan";
+import { DaySpan, Calendar, Functions as fn } from "dayspan";
 import defaults from "../defaults";
 
 export default {
@@ -99,101 +109,95 @@ export default {
     },
   },
 
-  setup(props) {
-    const getMonthStart = () => {
-      // return props.span && props.span.start ? props.span.start : this.$dayspan.today;
-      return props.span && props.span.start ? props.span.start : "TODO";
-    };
+  data: vm => ({
+    month: vm.getMonth()
+  }),
 
-    const getMonth = () => {
-      return Calendar.months(1, getMonthStart(), 0, {fill: true, minimumSize: 42});
-    };
-
-    const month = ref(getMonth());
-
-    const summary = computed(() => {
-      return month.value.summary(false, false, false, false);
-    });
-
-    const isHighlighted = day => {
-      return props.highlightSpan && props.span.matchesDay(day);
+  computed:
+  {
+    summary()
+    {
+      return this.month ? this.month.summary(false, false, false, false) : '';
     }
+  },
 
-    const prev = () => {
-      console.log('prev');
+  watch:
+  {
+    span:
+    {
+      deep: true,
+      handler: 'resetMonth'
     }
+  },
 
-    const next = () => {
-      console.log('next');
-    }
+  methods: {
+    isHighlighted(day) {
+      return this.highlightSpan && this.span.matchesDay(day);
+    },
 
-    return {
-      summary,
-      prev,
-      next,
-      month,
-      isHighlighted
-    }
+    getMonthStart() {
+      return this.span && this.span.start
+        ? this.span.start
+        : this.$dayspan.today;
+    },
+
+    resetMonth() {
+      if (!this.span.matchesMonth(this.month.start)) {
+        this.month = this.getMonth();
+      }
+    },
+
+    getMonth() {
+      return Calendar.months(1, this.getMonthStart(), 0, {
+        fill: true,
+        minimumSize: 42,
+      });
+    },
+
+    pick(day) {
+      this.$emit("picked", day);
+    },
+
+    prev() {
+      var ev = this.getEvent("prev", { next: false, prev: true });
+
+      this.$emit("prev", ev);
+
+      if (!ev.handled) {
+        ev.month.prev();
+        ev.handled = true;
+      }
+
+      this.$emit("change", ev);
+    },
+
+    next() {
+      var ev = this.getEvent("next", { next: true, prev: false });
+
+      this.$emit("next", ev);
+
+      if (!ev.handled) {
+        ev.month.next();
+        ev.handled = true;
+      }
+
+      this.$emit("change", ev);
+    },
+
+    getEvent(type, extra = {}) {
+      return fn.extend(
+        {
+          type: type,
+          span: this.span,
+          month: this.month,
+          handled: false,
+          $vm: this,
+          $element: this.$el,
+        },
+        extra
+      );
+    },
   }
-
-  // watch: {
-  //   span: {
-  //     deep: true,
-  //     handler: "resetMonth",
-  //   },
-  // },
-
-  // methods: {
-  //   resetMonth() {
-  //     if (!this.span.matchesMonth(this.month.start)) {
-  //       this.month = this.getMonth();
-  //     }
-  //   },
-
-  //   pick(day) {
-  //     this.$emit("picked", day);
-  //   },
-
-  //   prev() {
-  //     var ev = this.getEvent("prev", { next: false, prev: true });
-
-  //     this.$emit("prev", ev);
-
-  //     if (!ev.handled) {
-  //       ev.month.prev();
-  //       ev.handled = true;
-  //     }
-
-  //     this.$emit("change", ev);
-  //   },
-
-  //   next() {
-  //     var ev = this.getEvent("next", { next: true, prev: false });
-
-  //     this.$emit("next", ev);
-
-  //     if (!ev.handled) {
-  //       ev.month.next();
-  //       ev.handled = true;
-  //     }
-
-  //     this.$emit("change", ev);
-  //   },
-
-  //   getEvent(type, extra = {}) {
-  //     return fn.extend(
-  //       {
-  //         type: type,
-  //         span: this.span,
-  //         month: this.month,
-  //         handled: false,
-  //         $vm: this,
-  //         $element: this.$el,
-  //       },
-  //       extra
-  //     );
-  //   },
-  // },
 };
 </script>
 
