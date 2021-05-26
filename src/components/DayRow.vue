@@ -5,6 +5,7 @@
     <template v-for="(day, i) in days" :key="i">
 
       <ds-day
+        v-bind="$attrs"
         :day="day"
         :calendar="calendar"
         :placeholder="placeholder"

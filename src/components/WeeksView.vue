@@ -12,6 +12,7 @@
     </div>
 
     <ds-day-row
+      v-bind="$attrs"
       v-for="i in rows"
       :key="i"
       :days="daysAtRow( i, 7 )"

@@ -105,6 +105,7 @@
         <div v-if="currentType.schedule" class="ds-expand">schedule</div>
         <div v-else class="ds-expand">
           <ds-calendar
+            v-bind="$attrs"
             ref="calendar"
             :calendar="calendar"
             :read-only="readOnly"
@@ -357,6 +358,8 @@ export default {
     },
 
     add(day) {
+      console.log('add');
+      
       if (!this.canAddDay) {
         return;
       }

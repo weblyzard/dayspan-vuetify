@@ -23,6 +23,7 @@
     <div v-if="isMonth" class="ds-month-view">
 
       <ds-weeks-view class="ds-expand"
+        v-bind="$attrs"
         :calendar="calendar"
         :placeholder="placeholder"
         :placeholder-for-create="placeholderForCreate"
@@ -69,6 +70,8 @@ export default {
   components: {
     DsWeeksView
   },
+
+  inject: ['$dayspan'],
 
   props:
   {
