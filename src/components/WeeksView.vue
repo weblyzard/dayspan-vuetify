@@ -24,11 +24,15 @@
 </template>
 
 <script>
+import { inject } from "vue";
 import { Calendar, CalendarEvent } from "dayspan";
-import defaults from "../defaults";
 import DsDayRow from "./DayRow"
 
+const componentName = "dsWeeksView";
+
 export default {
+  name: componentName,
+
   components: {
     DsDayRow
   },
@@ -53,7 +57,8 @@ export default {
     weekdays: {
       type: Array,
       default() {
-        return defaults.weekdays;
+        const $dayspan = inject("$dayspan", {});
+        return $dayspan.defaults[componentName].weekdays;
       },
     },
   },
@@ -72,7 +77,7 @@ export default {
 
     weekdayClasses(weekday) {
       return {
-        "ds-week-header-today": this.$dayspan.data.today.dayOfWeek === weekday,
+        "ds-week-header-today": this.$dayspan.today.dayOfWeek === weekday,
       };
     },
   },

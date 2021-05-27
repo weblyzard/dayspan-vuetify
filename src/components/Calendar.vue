@@ -2,11 +2,9 @@
   <div class="ds-calendar">
 
     <div v-if="isYear" class="ds-month-view ds-year-view">
-      year
 
-      <!-- <ds-weeks-view class="ds-expand"
-        v-bind="{$scopedSlots}"
-        v-on="$listeners"
+      <ds-weeks-view class="ds-expand"
+        v-bind="$attrs"
         :calendar="calendar"
         :placeholder="placeholder"
         :placeholder-for-create="placeholderForCreate"
@@ -16,7 +14,7 @@
         @mouse-up-event="mouseUp"
         @mouse-down-event="mouseDownEvent"
         @clear-placeholder="clearPlaceholder"
-      ></ds-weeks-view> -->
+      ></ds-weeks-view>
 
     </div>
 
@@ -38,11 +36,8 @@
     </div>
 
     <div v-if="isWeek || isDay" class="ds-week-view">
-      week
-
-      <!-- <ds-days-view
-        v-bind="{$scopedSlots}"
-        v-on="$listeners"
+      <ds-days-view
+        v-bind="$attrs"
         :calendar="calendar"
         :placeholder="placeholder"
         :placeholder-for-create="placeholderForCreate"
@@ -55,7 +50,7 @@
         @mouse-up-day="mouseUp"
         @mouse-up-event="mouseUp"
         @clear-placeholder="clearPlaceholder"
-      ></ds-days-view> -->
+      ></ds-days-view>
 
     </div>
 
@@ -65,10 +60,12 @@
 <script>
 import { Calendar, Schedule, Units, Op, Functions as fn } from 'dayspan';
 import DsWeeksView from './WeeksView';
+import DsDaysView from './DaysView';
 
 export default {
   components: {
-    DsWeeksView
+    DsWeeksView,
+    DsDaysView
   },
 
   inject: ['$dayspan'],

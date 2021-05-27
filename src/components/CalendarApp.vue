@@ -126,24 +126,22 @@
       <slot name="menuRight"></slot>
     -->
 
-    <v-main>
-      <v-container fluid fill-height class="ds-calendar-container">
-        <div v-if="currentType.schedule" class="ds-expand">schedule</div>
-        <div v-else class="ds-expand">
-          <ds-calendar
-            v-bind="$attrs"
-            ref="calendar"
-            :calendar="calendar"
-            :read-only="readOnly"
-            @add="add"
-            @add-at="addAt"
-            @edit="edit"
-            @view-day="viewDay"
-            @added="handleAdd"
-            @moved="handleMove"
-          ></ds-calendar>
-        </div>
-      </v-container>
+    <v-main class="ds-main-container">
+      <div v-if="currentType.schedule" class="ds-expand">schedule</div>
+      <div v-else class="ds-expand">
+        <ds-calendar
+          v-bind="$attrs"
+          ref="calendar"
+          :calendar="calendar"
+          :read-only="readOnly"
+          @add="add"
+          @add-at="addAt"
+          @edit="edit"
+          @view-day="viewDay"
+          @added="handleAdd"
+          @moved="handleMove"
+        ></ds-calendar>
+      </div>
     </v-main>
 
     <!-- 
@@ -732,7 +730,7 @@ $light-color: #757575;
 .ds-calendar-container {
   padding: 0px !important;
   position: relative;
-  height: 100%;
+  // height: 100%;
 }
 
 .v-btn--floating.ds-add-event-today {
@@ -756,5 +754,9 @@ select {
 
 .ds-today-btn {
   margin-left: 203px;
+}
+
+.ds-main-container {
+  overflow: auto;
 }
 </style>
