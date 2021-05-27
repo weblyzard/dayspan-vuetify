@@ -10,8 +10,34 @@
         @click.stop.prevent="drawer = !drawer"
       ></v-app-bar-nav-icon>
 
-      <v-spacer></v-spacer>
-      Test
+      <v-btn class="ds-skinny-button ds-today-btn"
+        flat
+        outlined
+        @click="setToday">
+
+        <span>{{ labels.today }}</span>
+
+      </v-btn>
+
+      <v-btn
+        size="small"
+        icon flat class="ds-light-forecolor ds-skinny-button"
+        @click="prev" >
+        <v-icon>mdi-chevron-left</v-icon>
+      </v-btn>
+
+      <v-btn
+        icon flat
+        size="small"
+        class="ds-light-forecolor ds-skinny-button"
+        @click="next">
+        <v-icon>mdi-chevron-right</v-icon>
+      </v-btn>
+
+      <h1 class="ds-title ds-light-forecolor">
+        {{ summary }}
+      </h1>
+
       <v-spacer></v-spacer>
 
       <select v-model="currentType">
@@ -250,6 +276,13 @@ export default {
         return $dayspan.defaults[componentName].types;
       },
     },
+    labels:
+    {
+      default() {
+        const $dayspan = inject("$dayspan", {});
+        return $dayspan.defaults[componentName].labels;
+      }
+    },
   },
 
   computed: {
@@ -266,6 +299,12 @@ export default {
       set(type) {
         this.rebuild(undefined, true, type);
       },
+    },
+
+    summary()
+    {
+      let large = true;
+      return this.calendar.summary(false, !large, false, !large);
     },
   },
 
@@ -579,6 +618,11 @@ $control-color: #f5f5f5;
 
 $light-color: #757575;
 
+.ds-title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
 .ds-button-tall {
   height: 48px;
   margin-top: 0px;
@@ -677,8 +721,8 @@ $light-color: #757575;
 }
 
 .ds-skinny-button {
-  margin-left: 2px !important;
-  margin-right: 2px !important;
+  margin-left: 2px;
+  margin-right: 2px;
 }
 
 .ds-expand {
@@ -708,5 +752,9 @@ select {
   text-align: center;
   border: 1px solid #aaa;
   cursor: pointer;
+}
+
+.ds-today-btn {
+  margin-left: 203px;
 }
 </style>
