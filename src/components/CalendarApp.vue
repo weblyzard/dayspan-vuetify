@@ -713,7 +713,9 @@ $light-color: #757575;
 }
 
 .ds-app-calendar-toolbar {
-  position: absolute;
+  position: absolute  !important;
+  border-bottom: 1px solid #e0e0e0 !important;
+  box-shadow: none !important;
 
   .v-toolbar__content {
     border-bottom: 1px solid rgb(224, 224, 224);
@@ -763,6 +765,6 @@ select {
 }
 
 .ds-navigation-drawer {
-  position: absolute;
+  position: absolute !important;
 }
 </style>
