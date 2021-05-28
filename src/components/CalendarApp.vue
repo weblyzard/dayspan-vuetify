@@ -64,7 +64,7 @@
         </v-menu> -->
     </v-app-bar>
 
-    <v-navigation-drawer app v-model="drawer">
+    <v-navigation-drawer app v-model="drawer" class="ds-navigation-drawer">
       <div class="pa-3" v-if="calendar">
         <ds-day-picker :span="calendar.span" @picked="rebuild"></ds-day-picker>
       </div>
@@ -713,6 +713,8 @@ $light-color: #757575;
 }
 
 .ds-app-calendar-toolbar {
+  position: absolute;
+
   .v-toolbar__content {
     border-bottom: 1px solid rgb(224, 224, 224);
   }
@@ -758,5 +760,9 @@ select {
 
 .ds-main-container {
   overflow: auto;
+}
+
+.ds-navigation-drawer {
+  position: absolute;
 }
 </style>
